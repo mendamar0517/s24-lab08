@@ -47,7 +47,6 @@ describe('Test prioritization', () => {
   cardStatus8.recordResult(true)
   cardStatus8.recordResult(true)
   cardStatus8.recordResult(true)
-  // Covering all combinations of CardStatus with three recorded results.
 
   const cards: CardStatus[] = [cardStatus1, cardStatus2, cardStatus3, cardStatus4, cardStatus5, cardStatus6, cardStatus7, cardStatus8]
 
@@ -63,14 +62,15 @@ describe('Test prioritization', () => {
     expect(cardsSorted[7]).toEqual(cardStatus8)
   })
 
-  test('Test recentRecentMistakesFirstSorter', () => {
+  test('Test recentMistakesFirstSorter', () => {
+    
     const cardsSorted: CardStatus[] = createRecentMistakesFirstSorter().reorganize(cards)
     expect(cardsSorted[0]).toEqual(cardStatus1)
     expect(cardsSorted[1]).toEqual(cardStatus2)
-    expect(cardsSorted[2]).toEqual(cardStatus4)
-    expect(cardsSorted[3]).toEqual(cardStatus6)
-    expect(cardsSorted[4]).toEqual(cardStatus3)
-    expect(cardsSorted[5]).toEqual(cardStatus5)
+    expect(cardsSorted[2]).toEqual(cardStatus3)
+    expect(cardsSorted[3]).toEqual(cardStatus4)
+    expect(cardsSorted[4]).toEqual(cardStatus5)
+    expect(cardsSorted[5]).toEqual(cardStatus6)
     expect(cardsSorted[6]).toEqual(cardStatus7)
     expect(cardsSorted[7]).toEqual(cardStatus8)
   })

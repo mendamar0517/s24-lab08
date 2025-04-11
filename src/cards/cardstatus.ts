@@ -1,10 +1,11 @@
-import { FlashCard } from './flashcard.js'
+import { FlashCard } from './flashcard'
 
 interface CardStatus {
+  lastMistakeTimestamp: number
   /**
-   * Retrieves the {@link edu.cmu.cs214.hw1.cards.FlashCard} associated with this {@code CardStatus}.
+   * Retrieves the {@link FlashCard} associated with this {@code CardStatus}.
    *
-   * @return The associated {@link edu.cmu.cs214.hw1.cards.FlashCard}.
+   * @return The associated {@link FlashCard}.
    */
   getCard: () => FlashCard
 
@@ -26,7 +27,7 @@ interface CardStatus {
    * Resets the record of past answering outcomes.
    */
   clearResults: () => void
-};
+}
 
 /**
  * Creates a new {@link CardStatus} instance.
@@ -35,12 +36,24 @@ interface CardStatus {
  */
 function newCardStatus (card: FlashCard): CardStatus {
   let successes: boolean[] = []
+  let lastMistakeTimestamp = 0 // Алдааны цагийг хадгалах хувьсагч
+
   return {
+    lastMistakeTimestamp,
     getCard: function (): FlashCard { return card },
     getResults: function (): boolean[] { return successes.slice() },
-    recordResult: function (success: boolean): void { successes.push(success) },
-    clearResults: function (): void { successes = [] }
+    recordResult: function (success: boolean): void {
+      successes.push(success)
+      if (!success) {
+        // Хэрвээ алдаа гарсан бол цагийг хадгална
+        lastMistakeTimestamp = Date.now() // Одоо байгаа цаг
+      }
+    },
+    clearResults: function (): void {
+      successes = []
+      lastMistakeTimestamp = 0 // Алдааны цагийг цэвэрлэх
+    }
   }
-};
+}
 
 export { CardStatus, newCardStatus }

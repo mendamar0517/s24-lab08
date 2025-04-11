@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES6",
-        "module": "commonjs",      // Change to CommonJS
+        "module": "CommonJS",      // Change to CommonJS
         "sourceMap": true,
         "strict": true,
         "esModuleInterop": true,
@@ -9,5 +9,5 @@
         "outDir": "./dist",
         "rootDir": "./src"
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*","test/**/*"]
 }

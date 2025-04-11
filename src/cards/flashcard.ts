@@ -1,5 +1,5 @@
-
 interface FlashCard {
+  [x: string]: any
   getQuestion: () => string
   getAnswer: () => string
 
@@ -35,6 +35,6 @@ function newFlashCard (question: string, answer: string): FlashCard {
       return otherCard.getAnswer() === answer && otherCard.getQuestion() === question
     }
   }
-};
+}
 
 export { FlashCard, newFlashCard }
